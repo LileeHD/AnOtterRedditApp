@@ -65,7 +65,8 @@ public class Constants {
     public static final String DURATION = "permanent";
 
     public static final String SCOPE_KEY = "scope";
-    public static final String SCOPE = "identity, mysubreddits";
+    public static final String SCOPE = "identity, mysubreddits, read, report, save, submit, subscribe, vote";
+//    public static final String SCOPE = "identity, edit, flair, history, modconfig, modflair, modlog, modposts, modwiki, mysubreddits, privatemessages, read, report, save, submit, subscribe, vote, wikiedit, wikiread";
 
     public static final String GRANT_TYPE_KEY = "grant_type";
     public static final String GRANT_TYPE = "authorization_code";

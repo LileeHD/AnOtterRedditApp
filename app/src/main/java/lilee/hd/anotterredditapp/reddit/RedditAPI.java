@@ -8,6 +8,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface RedditAPI {
@@ -21,9 +22,6 @@ public interface RedditAPI {
     // search
     @GET("r/subreddits/search.json?&raw_json=1&type=sr")
     Call<Feed> searchSubreddit(@Query("q") String subredditName,
-                               @Query("t") String time, @Query("sort") String sort);
-    @GET("r/{subreddit}/search.json?&raw_json=1&type=sr")
-    Call<Feed> search(@Query("q") String subredditName,
                                @Query("t") String time, @Query("sort") String sort);
 
 

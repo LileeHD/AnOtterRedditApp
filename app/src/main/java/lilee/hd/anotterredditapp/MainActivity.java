@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     private EditText mFeedName;
     private String mCurrentFeed;
     private String sort = "new";
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textView = findViewById(R.id.text_result);
         btn = findViewById(R.id.btnFetchFeed);
         mFeedName = findViewById(R.id.edit_text);
 
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchCall() {
-        final TextView textView = findViewById(R.id.text_result);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -170,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onResume() {
         super.onResume();
