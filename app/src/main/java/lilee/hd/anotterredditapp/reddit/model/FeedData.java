@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import lilee.hd.anotterredditapp.reddit.model.feedchildren.Children;
+import lilee.hd.anotterredditapp.reddit.model.post.Children;
 
 public class FeedData {
     @SerializedName("modhash")

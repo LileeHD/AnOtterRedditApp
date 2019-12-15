@@ -2,4 +2,44 @@
     <string name="app_name">AnOtterRedditApp</string>
     <string name="login">Login</string>
     <string name="fetch_feed">Fetch feed</string>
+<!--fragments-->
+    <string name="home_fragment">home fragment</string>
+    <string name="search_fragment">search fragment</string>
+    <string name="edit_fragment">edit fragment</string>
+    <string name="msg_fragment">notification fragment</string>
+    <string name="otter_fragment">otter fragment</string>
+    <string name="profile_user_name">my username</string>
+    <string name="profile_fragment">profile fragment</string>
+
+
+    <string name="app_logo">App logo</string>
+    <string name="search_icon">Search icon</string>
+    <string name="autofill_hint">subreddit or post</string>
+    <string name="post_body_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
+    <string name="post_title">What is Lorem Ipsum?</string>
+    <string name="endpoint_user_author">u/redditdev</string>
+    <string name="r_subreddit">r_subreddit</string>
+    <string name="thumbnail">Thumbnail</string>
+    <string name="comment">comments</string>
+    <string name="share">share</string>
+    <string name="my_infos">my info</string>
+    <string name="my_subscriptions">my subscriptions</string>
+
+    <string name="login_state_icon">login state icon</string>
+
+<!--    Menu-->
+    <string name="search">search</string>
+    <string name="home">home</string>
+    <string name="profile">profile</string>
+    <string name="edit">edit</string>
+    <string name="notice">notice</string>
+    <string name="reply">reply</string>
+    <string name="up_icon">up icon</string>
+    <string name="down_icon">down icon</string>
+    <string name="reply_icon">reply icon</string>
+    <string name="share_icon">share icon</string>
+    <string name="extended_floating_action_button">Extended floating action button</string>
+    <string name="www_something_yeah">www.something.yeah</string>
+    <string name="login_btn_text">Sign in or sign up</string>
+
 </resources>

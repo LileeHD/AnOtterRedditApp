@@ -1,8 +1,10 @@
 package lilee.hd.anotterredditapp.reddit.model;
 
+import androidx.room.Entity;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+@Entity(tableName = "access_token")
 public class TokenResponse {
     @SerializedName("access_token")
     @Expose
