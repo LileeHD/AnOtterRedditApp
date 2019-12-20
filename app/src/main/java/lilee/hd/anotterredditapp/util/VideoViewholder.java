@@ -23,7 +23,7 @@ public class VideoViewholder extends RecyclerView.ViewHolder{
     public VideoViewholder(@NonNull View itemView) {
         super(itemView);
         parent = itemView;
-        media_container = itemView.findViewById(R.id.post_container);
+//        media_container = itemView.findViewById(R.id.post_container);
         thumbnail = itemView.findViewById(R.id.post_video);
 //        volumeControl = itemView.findViewById(R.id.volume_control);
     }
