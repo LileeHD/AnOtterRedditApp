@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "445473974705",
+    "firebase_url": "https://anotterredditapp.firebaseio.com",
+    "project_id": "anotterredditapp",
+    "storage_bucket": "anotterredditapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445473974705:android:6ff472a35cb181c8c7f590",
+        "android_client_info": {
+          "package_name": "lilee.hd.anotterredditapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445473974705-d9lmlo920cc7rtqh0490m40nodivufi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lilee.hd.anotterredditapp",
+            "certificate_hash": "03572b45a4006167a086a69834598cdbf9b70583"
+          }
+        },
+        {
+          "client_id": "445473974705-mado611cu5hrf405u6mou1deeao0u6tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQHUv903KYNQKuRM8Jps_1DYhv0Mh_ZUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445473974705-mado611cu5hrf405u6mou1deeao0u6tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
