@@ -15,11 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
 
@@ -27,7 +25,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import lilee.hd.anotterredditapp.R;
 import lilee.hd.anotterredditapp.database.OtterDatabase;
-import lilee.hd.anotterredditapp.home_ui.SectionPagerAdapter;
 import lilee.hd.anotterredditapp.model.account.Account;
 import lilee.hd.anotterredditapp.model.token.TokenResponse;
 import lilee.hd.anotterredditapp.reddit.RedditNetworking;
@@ -37,15 +34,21 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "ProfileFragment";
     public OkHttpClient.Builder client;
     public RedditNetworking networking = new RedditNetworking();
-    @BindView(R.id.signin_msg) Button mLoginBtn;
-    @BindView(R.id.unlogged_otter) ImageView userPic;
-    @BindView(R.id.login_state) ImageView loginState;
-    @BindView(R.id.user_name) TextView userName;
-    @BindView(R.id.subreddit_list) RecyclerView subredditView;
+    @BindView(R.id.signin_msg)
+    Button mLoginBtn;
+    @BindView(R.id.unlogged_otter)
+    ImageView userPic;
+    @BindView(R.id.login_state)
+    ImageView loginState;
+    @BindView(R.id.user_name)
+    TextView userName;
+    @BindView(R.id.subreddit_list)
+    RecyclerView subredditView;
     private View view;
     private OtterDatabase mDatabase;
     private TokenResponse tokenResponse;
     private Account account;
+
     public ProfileFragment() {
     }
 
@@ -106,8 +109,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     /**
      * TODO, don't panic, finish the bd BEFORE !!
      */
-    private void setAccount(){
-        if (tokenResponse != null){
+    private void setAccount() {
+        if (tokenResponse != null) {
 //            account = mDatabase.accountDao().getCurrentAccount();
 //            profileViews(account);
         }

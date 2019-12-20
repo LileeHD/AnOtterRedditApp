@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/post_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -16,7 +15,6 @@
         android:visibility="visible" />
 
     <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/post_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

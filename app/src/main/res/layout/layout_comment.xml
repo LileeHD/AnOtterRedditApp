@@ -35,5 +35,4 @@
         android:textColor="#000"
         android:textSize="13sp" />
 
-    <include layout="@layout/snippet_comment_bottom_bar" />
 </LinearLayout>

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class TimestampConverter {
+public class ConverterUtil {
 
         private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

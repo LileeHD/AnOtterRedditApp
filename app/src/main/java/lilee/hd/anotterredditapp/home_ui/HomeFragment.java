@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -20,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,20 +43,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ImageButton searchBtn;
     @BindView(R.id.home_list_view)
     RecyclerView postView;
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.swipe_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     private Snackbar snackbar;
     private PostViewAdapter adapter;
     private Post post;
     private ArrayList<Post> postsList = new ArrayList<>();
     private TokenResponse tokenResponse;
     private PostViewModel mPostViewModel;
-    //    top bar
-    //    tabs
-    private View view;
     private String mSearchResult;
     private String sort = "new";
-    private RedditNetworking networking;
+
     public HomeFragment() {
     }
 
@@ -61,12 +61,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_home, container, false);
+        //    top bar
+        //    tabs
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         searchBtn.setOnClickListener(this);
-        networking = new RedditNetworking();
-//        networking.redditCall();
-//        setUpViewPager();
+        RedditNetworking networking = new RedditNetworking();
+        networking.redditCall();
         initviewModel();
         initPostView();
         Log.d(TAG, "onCreateView: PHARAH");
@@ -80,10 +81,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "initviewModel: ");
     }
     private void initPostView() {
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getActivity()), DividerItemDecoration.VERTICAL);
         adapter = new PostViewAdapter(getContext(),mPostViewModel.getPostList().getValue());
-        postView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        postView.addItemDecoration(dividerItemDecoration);
+        postView.setItemAnimator(new DefaultItemAnimator());
         postView.setAdapter(adapter);
+        postView.setLayoutManager(new LinearLayoutManager(getContext()));
         postView.setHasFixedSize(true);
+
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            adapter.notifyDataSetChanged();
+        });
         Log.d(TAG, "initPostView: ");
     }
 
@@ -94,23 +103,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             mSearchResult = feedName;
             searchResult();
         } else {
-            Log.d(TAG, "onClick: Type a word ffs!");
+            Log.d(TAG, "onClick: SET A SNACK BAR ");
         }
     }
-//    private void setUpViewPager() {
-//        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager(), 1);
-//        adapter.addFragment(new DefaultFragmentChild());
-//        adapter.addFragment(new OtterFragmentChild());
-//
-//        ViewPager viewPager = view.findViewById(R.id.viewpager_container);
-//        viewPager.setAdapter(adapter);
-//
-//        tabLayout.setupWithViewPager(viewPager);
-//
-//        Objects.requireNonNull(tabLayout.getTabAt(0)).setIcon(R.drawable.ic_mug);
-//        Objects.requireNonNull(tabLayout.getTabAt(1)).setIcon(R.drawable.ic_otter);
-//
-//    }
+
 
     private void searchResult() {
         RedditNetworking networking = new RedditNetworking();

@@ -38,25 +38,22 @@ public class HomeActivity extends AppCompatActivity {
 
     private void bottomNavSetup() {
         navView = findViewById(R.id.bottom_nav_bar);
-        navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = new HomeFragment();
-                switch (item.getItemId()) {
-                    case R.id.ic_home:
-                        selectedFragment = new HomeFragment();
-                        break;
-                    case R.id.ic_profile:
-                        selectedFragment = new ProfileFragment();
-                        break;
-                    case R.id.ic_otter:
-                        selectedFragment = new OtterFragment();
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, selectedFragment).commit();
-                return true;
+        navListener = item -> {
+            Fragment selectedFragment = new HomeFragment();
+            switch (item.getItemId()) {
+                case R.id.ic_home:
+                    selectedFragment = new HomeFragment();
+                    break;
+                case R.id.ic_profile:
+                    selectedFragment = new ProfileFragment();
+                    break;
+                case R.id.ic_otter:
+                    selectedFragment = new OtterFragment();
+                    break;
             }
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, selectedFragment).commit();
+            return true;
         };
         navView.setOnNavigationItemSelectedListener(navListener);
     }

@@ -9,6 +9,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/otter_post_rview"
-        tools:listitem="@layout/layout_post_item"
+        tools:listitem="@layout/post_item"
         />
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
