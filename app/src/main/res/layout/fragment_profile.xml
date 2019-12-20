@@ -1,135 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark">
+    android:background="@android:color/holo_green_dark"
+    android:orientation="vertical">
 
 
-        <!-- top toolbar -->
-        <com.google.android.material.appbar.AppBarLayout
+    <!-- top toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:id="@+id/appLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.Toolbar
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/not_logged_topbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:visibility="visible">
+
+                <ImageButton
+                    android:id="@+id/login_state"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/white_rounded_btn"
+                    android:contentDescription="Login state"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_on"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/unlogged_otter"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="8dp"
+                    android:contentDescription="@string/app_logo"
+                    android:src="@drawable/theotter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/signin_msg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:background="@drawable/white_rounded_btn"
+                    android:paddingVertical="8dp"
+                    android:text="@string/login_btn_text"
+                    android:textSize="15sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.538"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/unlogged_otter" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/logged_topbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:visibility="gone">
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/username"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.538"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/unlogged_otter" />
 
-                                <ImageView
-                                    android:id="@+id/user_pic"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_margin="8dp"
-                                    android:contentDescription="@string/app_logo"
-                                    android:src="@drawable/tobbie"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <!-- body -->
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="8dp"
+       android:padding="8dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/appLayout">
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/subreddit_list"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" />
+   </ScrollView>
 
-                                <TextView
-                                    android:id="@+id/user_name"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:paddingVertical="8dp"
-                                    android:text="Lilee"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@+id/login_state"
-                                    app:layout_constraintHorizontal_bias="0.538"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/user_pic" />
-
-                                <ImageButton
-                                    android:layout_marginVertical="8dp"
-                                    android:layout_marginHorizontal="16dp"
-                                    android:id="@+id/login_state"
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:padding="4dp"
-                                    android:contentDescription="Login state"
-                                    android:background="@drawable/white_rounded_btn"
-                                    android:src="@drawable/ic_on"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="1.0" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/not_logged_topbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:visibility="visible">
-
-                                <ImageView
-                                    android:id="@+id/unlogged_otter"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_margin="8dp"
-                                    android:contentDescription="@string/app_logo"
-                                    android:src="@drawable/theotter"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.0" />
-
-                                <Button
-                                    android:id="@+id/signin_msg"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:paddingVertical="8dp"
-                                    android:layout_marginVertical="16dp"
-                                    android:text="@string/login_btn_text"
-                                    android:background="@drawable/white_rounded_btn"
-                                    android:textSize="15sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.538"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/unlogged_otter" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-        <!-- body -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_grey_border_top"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appLayout">
-
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabs"
-            app:layout_constraintVertical_bias="0.0">
-
-        </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import lilee.hd.anotterredditapp.R;
-import lilee.hd.anotterredditapp.notification.NotificationFragment;
+import lilee.hd.anotterredditapp.otter.OtterFragment;
 import lilee.hd.anotterredditapp.profile.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bottomNavSetup();
 
-        if (getIntent().getData() != null){
+        if (savedInstanceState == null && getIntent().getData() != null){
             navView.setSelectedItemId(R.id.ic_profile);
         }else {
             navView.setSelectedItemId(R.id.ic_home);
@@ -49,8 +49,8 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.ic_profile:
                         selectedFragment = new ProfileFragment();
                         break;
-                    case R.id.ic_notice:
-                        selectedFragment = new NotificationFragment();
+                    case R.id.ic_otter:
+                        selectedFragment = new OtterFragment();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction()

@@ -1,7 +1,9 @@
-package lilee.hd.anotterredditapp.reddit.model;
+package lilee.hd.anotterredditapp.model.post;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import lilee.hd.anotterredditapp.model.post.FeedData;
 
 public class Feed {
     @SerializedName("kind")

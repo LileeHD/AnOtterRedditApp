@@ -41,5 +41,11 @@
     <string name="extended_floating_action_button">Extended floating action button</string>
     <string name="www_something_yeah">www.something.yeah</string>
     <string name="login_btn_text">Sign in or sign up</string>
+    <string name="username">Username</string>
+    <string name="subscribers">subscribers</string>
+    <string name="android">Android</string>
+    <string name="random_number">15688446</string>
+    <string name="subreddit_icon">subreddit_icon</string>
+    <string name="favorite_icon">favorite_icon</string>
 
 </resources>

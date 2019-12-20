@@ -1,14 +1,21 @@
-package lilee.hd.anotterredditapp.reddit.model.post;
+package lilee.hd.anotterredditapp.model.post;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import lilee.hd.anotterredditapp.model.post.Media;
+import lilee.hd.anotterredditapp.model.post.RedditVideo;
+
 @Entity(tableName = "post_table")
 public class Post {
     //    Media
     private Media media;
-
+    @PrimaryKey(autoGenerate = true)
     private String id;
     //top bar
     @SerializedName("subreddit_name_prefixed")
@@ -17,6 +24,7 @@ public class Post {
     @SerializedName("author")
     @Expose
     private String author;
+
     @SerializedName("created")
     @Expose
     private long date;
@@ -48,6 +56,22 @@ public class Post {
 
 //    ----------------------------------------Getter Setter----------------------------------------
 
+
+    public Post(Media media, String subredditR, String author, long date, String title,
+                String body, String postUrl, int ups, String thumbnail, int numComments, String videoUrl, boolean isVideo) {
+        this.media = media;
+        this.subredditR = subredditR;
+        this.author = author;
+        this.date = date;
+        this.title = title;
+        this.body = body;
+        this.postUrl = postUrl;
+        this.ups = ups;
+        this.thumbnail = thumbnail;
+        this.numComments = numComments;
+        this.videoUrl = videoUrl;
+        this.isVideo = isVideo;
+    }
 
     public int getNumComments() {
         return numComments;

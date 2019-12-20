@@ -2,10 +2,13 @@ package lilee.hd.anotterredditapp.reddit;
 
 import java.util.Map;
 
-import lilee.hd.anotterredditapp.reddit.model.Feed;
-import lilee.hd.anotterredditapp.reddit.model.TokenResponse;
+import lilee.hd.anotterredditapp.model.subreddit.Subreddit;
+import lilee.hd.anotterredditapp.model.account.Account;
+import lilee.hd.anotterredditapp.model.post.Feed;
+import lilee.hd.anotterredditapp.model.token.TokenResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
@@ -44,9 +47,9 @@ public interface RedditAPI {
 
     /**
      * access token and user data
-     * @param grantType
-     * @param code
-     * @param redirect_uri
+//     * @param grantType
+//     * @param code
+//     * @param redirect_uri
      * @return
      */
     @FormUrlEncoded
@@ -56,7 +59,30 @@ public interface RedditAPI {
             @Field("code") String code,
             @Field("redirect_uri") String redirect_uri
     );
+    @FormUrlEncoded
+    @POST("api/v1/access_token")
+    Call<String> getAccessTokenAuth(
+            @HeaderMap Map<String, String> headers, @FieldMap Map<String, String> params
+    );
 
+    @FormUrlEncoded
+    @POST("api/v1/access_token")
+    Call<TokenResponse> getRefreshToken(
+            @Field("grant_type") String grantType,
+            @Field("refresh_token") String refreshToken
+    );
+
+    /**
+     * From here use: https://oauth.reddit.com
+     * @return
+     */
     @GET("api/v1/me?raw_json=1")
-    Call<String> getMyInfo(@HeaderMap Map<String, String> headers);
+    Call<Account> getMyInfo();
+
+    @GET("subreddits/mine/subscriber?raw_json=1")
+    Call<Subreddit> getSubscribedThing();
+
+    @GET("r/{account_feed}/new.json")
+    Call<Feed>getAccountFeed(@Path("account_feed") String accountFeed);
+
 }

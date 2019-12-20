@@ -1,11 +1,9 @@
-package lilee.hd.anotterredditapp.reddit.model;
+package lilee.hd.anotterredditapp.model.post;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-
-import lilee.hd.anotterredditapp.reddit.model.post.Children;
 
 public class FeedData {
     @SerializedName("modhash")

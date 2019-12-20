@@ -10,8 +10,8 @@
         android:icon="@drawable/ic_notlogged"
         android:title="@string/profile"/>
     <item
-        android:id="@+id/ic_notice"
-        android:icon="@drawable/ic_notice"
+        android:id="@+id/ic_otter"
+        android:icon="@drawable/ic_otter"
         android:title="@string/notice"/>
 
 </menu>

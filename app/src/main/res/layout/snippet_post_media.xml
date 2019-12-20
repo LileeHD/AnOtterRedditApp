@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/post_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/thumbnail"
+        android:maxHeight="200dp"
+        android:minHeight="80dp"
+        android:src="@drawable/theotter"
+        android:visibility="visible" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/post_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/thumbnail"
+        android:maxHeight="200dp"
+        android:minHeight="80dp"
+        android:visibility="gone"/>
+</merge>

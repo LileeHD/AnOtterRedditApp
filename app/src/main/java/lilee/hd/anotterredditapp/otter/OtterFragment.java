@@ -1,4 +1,4 @@
-package lilee.hd.anotterredditapp.notification;
+package lilee.hd.anotterredditapp.otter;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,21 +14,28 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lilee.hd.anotterredditapp.R;
+import lilee.hd.anotterredditapp.reddit.RedditNetworking;
 
-public class NotificationFragment extends Fragment {
-    @BindView(R.id.swipe_layout)
+public class OtterFragment extends Fragment {
+    @BindView(R.id.otter_swipe_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.post_rview)
+    @BindView(R.id.otter_post_rview)
     RecyclerView recyclerView;
 
-    public NotificationFragment() {
+    public OtterFragment() {
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_otter_feed, container, false);
         ButterKnife.bind(this, view);
+        getOtterFeed();
         return view;
+
+    }
+
+    private void getOtterFeed(){
+        RedditNetworking networking = new RedditNetworking();
+        networking.otterCall();
     }
 }

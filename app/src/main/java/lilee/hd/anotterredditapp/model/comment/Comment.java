@@ -1,4 +1,4 @@
-package lilee.hd.anotterredditapp.reddit.model.post;
+package lilee.hd.anotterredditapp.model.comment;
 
 public class Comment {
     private String author;

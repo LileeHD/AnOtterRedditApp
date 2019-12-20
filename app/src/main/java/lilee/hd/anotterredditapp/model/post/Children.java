@@ -1,4 +1,4 @@
-package lilee.hd.anotterredditapp.reddit.model.post;
+package lilee.hd.anotterredditapp.model.post;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
