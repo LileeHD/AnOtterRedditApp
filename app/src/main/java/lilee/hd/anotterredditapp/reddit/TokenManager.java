@@ -31,7 +31,7 @@ public class TokenManager {
 
 //        String url = builder.toString();
 //        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(url));
+//        intent.setListData(Uri.parse(url));
 //        startActivity(intent);
 //        Log.d(TAG_TOKEN, "startSignIn: URL " + url);
     }

@@ -8,7 +8,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/home_frag"
+        android:layout_height="match_parent"
+        >
         <!-- top toolbar -->
 
         <com.google.android.material.appbar.AppBarLayout
@@ -84,11 +86,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/swipe_layout"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
-            android:background="@android:color/holo_green_dark">
+            android:background="@color/grey">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_list_view"
                 android:layout_width="match_parent"
                 android:foregroundGravity="center"
+                android:elevation="8dp"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/post_item"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

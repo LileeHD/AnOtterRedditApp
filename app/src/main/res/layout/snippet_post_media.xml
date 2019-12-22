@@ -8,7 +8,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/thumbnail"
+        android:contentDescription="@string/imageUrl"
         android:maxHeight="200dp"
         android:minHeight="80dp"
         android:src="@drawable/theotter"
@@ -20,7 +20,7 @@
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/thumbnail"
+        android:contentDescription="@string/imageUrl"
         android:maxHeight="200dp"
         android:minHeight="80dp"
         android:visibility="gone"/>

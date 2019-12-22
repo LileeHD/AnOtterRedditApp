@@ -5,12 +5,10 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.lifecycle.MutableLiveData;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import lilee.hd.anotterredditapp.database.OtterDatabase;
 import lilee.hd.anotterredditapp.model.post.Children;
@@ -82,7 +80,7 @@ public class RedditNetworking {
                 Log.d("searchCall", "onResponse: Server Response" + response.toString());
                 Log.d("searchCall", "onResponse: received information" + response.body().toString());
 
-                ArrayList<Children> childrenArrayList = response.body().getData().getChildren();
+                List<Children> childrenArrayList = response.body().getData().getChildren();
                 for (int i = 0; i < childrenArrayList.size(); i++) {
 
                     Log.d("searchCall", "onResponse: \n" +
@@ -92,9 +90,8 @@ public class RedditNetworking {
                             "created: " + childrenArrayList.get(i).getData().getDate() + "\n" +
                             "title: " + childrenArrayList.get(i).getData().getTitle() + "\n" +
                             "selftext: " + childrenArrayList.get(i).getData().getBody() + "\n" +
-                            "url: " + childrenArrayList.get(i).getData().getPostUrl() + "\n" +
                             "ups: " + childrenArrayList.get(i).getData().getUps() + "\n" +
-                            "thumbnail: " + childrenArrayList.get(i).getData().getThumbnail() + "\n" +
+                            "thumbnail: " + childrenArrayList.get(i).getData().getImageUrl() + "\n" +
                             "reddit_video: " + childrenArrayList.get(i).getData().getVideoUrl() + "\n" +
                             "-------------------------------------------------------------------------\n\n");
                 }
@@ -117,9 +114,9 @@ public class RedditNetworking {
                 Log.d(TAG_TOKEN, "onResponse: received information" + response.body().toString());
                 if (response.isSuccessful()){
                     response.body().getData().getChildren().toString();
-                ArrayList<Children> childrenArrayList = response.body().getData().getChildren();
+                List<Children> childrenArrayList = response.body().getData().getChildren();
                 for (int i = 0; i < childrenArrayList.size(); i++) {
-//                    Post info = childrenArrayList.get(i).getData();
+//                    Post info = childrenArrayList.get(i).getData()();
 //                    String title = info.getTitle();
                     Log.d(TAG_TOKEN, "onResponse: \n" +
                             "kind: " + childrenArrayList.get(i).getKind() + "\n" +
@@ -128,9 +125,8 @@ public class RedditNetworking {
                             "created: " + childrenArrayList.get(i).getData().getDate() + "\n" +
                             "title: " + childrenArrayList.get(i).getData().getTitle() + "\n" +
                             "selftext: " + childrenArrayList.get(i).getData().getBody() + "\n" +
-                            "url: " + childrenArrayList.get(i).getData().getPostUrl() + "\n" +
                             "ups: " + childrenArrayList.get(i).getData().getUps() + "\n" +
-                            "thumbnail: " + childrenArrayList.get(i).getData().getThumbnail() + "\n" +
+                            "thumbnail: " + childrenArrayList.get(i).getData().getImageUrl() + "\n" +
                             "reddit_video: " + childrenArrayList.get(i).getData().getVideoUrl() + "\n" +
                             "-------------------------------------------------------------------------\n\n");
                     Log.d(TAG, "onResponse: redditCall");
@@ -153,7 +149,7 @@ public class RedditNetworking {
                 Log.d(TAG_TOKEN, "onResponse: Server Response" + response.toString());
                 Log.d(TAG_TOKEN, "onResponse: received information" + response.body().toString());
 
-                ArrayList<Children> childrenArrayList = response.body().getData().getChildren();
+                List<Children> childrenArrayList = response.body().getData().getChildren();
                 for (int i = 0; i < childrenArrayList.size(); i++) {
 
                     Log.d(TAG_TOKEN, "onResponse: \n" +
@@ -163,9 +159,8 @@ public class RedditNetworking {
                             "created: " + childrenArrayList.get(i).getData().getDate() + "\n" +
                             "title: " + childrenArrayList.get(i).getData().getTitle() + "\n" +
                             "selftext: " + childrenArrayList.get(i).getData().getBody() + "\n" +
-                            "url: " + childrenArrayList.get(i).getData().getPostUrl() + "\n" +
                             "ups: " + childrenArrayList.get(i).getData().getUps() + "\n" +
-                            "thumbnail: " + childrenArrayList.get(i).getData().getThumbnail() + "\n" +
+                            "thumbnail: " + childrenArrayList.get(i).getData().getImageUrl() + "\n" +
                             "reddit_video: " + childrenArrayList.get(i).getData().getVideoUrl() + "\n" +
                             "-------------------------------------------------------------------------\n\n");
                 }

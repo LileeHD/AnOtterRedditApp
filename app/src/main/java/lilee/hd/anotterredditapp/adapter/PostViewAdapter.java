@@ -21,21 +21,25 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lilee.hd.anotterredditapp.R;
-import lilee.hd.anotterredditapp.model.post.Post;
+import lilee.hd.anotterredditapp.model.post.Children;
+import lilee.hd.anotterredditapp.viewmodel.PostViewModel;
 
-public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostViewHolder> {
+public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostViewHolder>{
 
     private static final int VIEW_TYPE_POST = 0;
     private static final int VIEW_TYPE_COMMENT = 1;
     private static final String TAG = "PostViewAdapter";
 
     private Context mContext;
-    private Post post;
-    private ArrayList<Post> posts;
+    private Children post;
+    private ArrayList<Children> posts;
+    private PostClickListener mListener;
+    private PostViewModel postViewModel;
 
-    public PostViewAdapter(Context context, ArrayList<Post> posts) {
+    public PostViewAdapter(Context context, ArrayList<Children> posts, PostClickListener listener){
         this.mContext = context;
         this.posts = posts;
+        this.mListener = listener;
         Log.d(TAG, "PostViewAdapter: ");
     }
 
@@ -43,30 +47,46 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         MaterialCardView rootView = (MaterialCardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item, parent, false);
-        return new PostViewHolder(rootView);
+        postViewModel = new PostViewModel();
+        return new PostViewHolder(rootView, mListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-
         post = posts.get(position);
-        holder.postTitle.setText(post.getTitle());
-        holder.rSubredditName.setText(post.getSubredditR());
-        holder.postAuthor.setText(post.getAuthor());
-//        holder.dateUpdate.setText(post.getDate());
-        holder.postBody.setText(post.getBody());
-        holder.postVotes.setText(post.getUps());
-        holder.postCommentsNum.setText(post.getNumComments());
-        imageLoader(holder);
+        holder.postTitle.setText(post.getData().getTitle());
+        holder.rSubredditName.setText(post.getData().getSubredditR());
+        holder.postAuthor.setText(post.getData().getAuthor());
+//        holder.dateUpdate.setText((CharSequence) ConverterUtil.fromTimestamp(String.valueOf(post.getData().getDate())));
+
+//        holder.postVotes.setText(post.getData().getUps());
+//        holder.postCommentsNum.setText(post.getData().getNumComments());
+
+        if (post.getData().getImageUrl()==null){
+            holder.postThumbnail.setVisibility(View.GONE);
+        }else {
+            imageLoader(holder);
+        }
+        if (post.getData().getBody().isEmpty()){
+            holder.postBody.setVisibility(View.GONE);
+        }else {
+            holder.postBody.setText(post.getData().getBody());
+        }
+
+
     }
 
     private void imageLoader(PostViewHolder holder) {
-        RequestOptions defaultOptions = new RequestOptions()
-                .error(R.drawable.ic_broken_image);
-        Glide.with(mContext)
-                .setDefaultRequestOptions(defaultOptions)
-                .load(post.getThumbnail())
-                .into(holder.postThumbnail);
+            RequestOptions defaultOptions = new RequestOptions()
+                    .error(null);
+            Glide.with(mContext)
+                    .setDefaultRequestOptions(defaultOptions)
+                    .load(post.getData().getImageUrl())
+                    .into(holder.postThumbnail);
+    }
+
+    private void videoLoader(PostViewHolder holder){
+
     }
 
     @Override
@@ -78,7 +98,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
         }
     }
 
-    class PostViewHolder extends RecyclerView.ViewHolder {
+    class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.post_cardview)
         MaterialCardView cardView;
@@ -98,15 +118,28 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
         TextView postTitle;
         @BindView(R.id.post_text)
         TextView postBody;
+        PostClickListener listener;
         //        bottom bar
-        @BindView(R.id.post_vote_num)
-        TextView postVotes;
-        @BindView(R.id.commentsNum)
-        TextView postCommentsNum;
-        PostViewHolder(@NonNull View itemView) {
+//        @BindView(R.id.post_vote_num)
+//        TextView postVotes;
+//        @BindView(R.id.commentsNum)
+//        TextView postCommentsNum;
+        PostViewHolder(@NonNull View itemView, PostClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
+            this.listener = listener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            listener.onPostClick(postViewModel,getAdapterPosition());
+        }
+    }
+
+    public interface PostClickListener {
+        void onPostClick(PostViewModel postViewModel, int position);
+
+        void onSearchClick(View view);
     }
 }

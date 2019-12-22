@@ -2,7 +2,7 @@
     <string name="app_name">AnOtterRedditApp</string>
     <string name="login">Login</string>
     <string name="fetch_feed">Fetch feed</string>
-<!--fragments-->
+    <!--fragments-->
     <string name="home_fragment">home fragment</string>
     <string name="search_fragment">search fragment</string>
     <string name="edit_fragment">edit fragment</string>
@@ -19,7 +19,7 @@
     <string name="post_title">What is Lorem Ipsum?</string>
     <string name="endpoint_user_author">u/redditdev</string>
     <string name="r_subreddit">r_subreddit</string>
-    <string name="thumbnail">Thumbnail</string>
+    <string name="imageUrl">Thumbnail</string>
     <string name="comment">comments</string>
     <string name="share">share</string>
     <string name="my_infos">my info</string>
@@ -27,7 +27,7 @@
 
     <string name="login_state_icon">login state icon</string>
 
-<!--    Menu-->
+    <!--    Menu-->
     <string name="search">search</string>
     <string name="home">home</string>
     <string name="profile">profile</string>

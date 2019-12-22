@@ -2,14 +2,9 @@ package lilee.hd.anotterredditapp.model.post;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import lilee.hd.anotterredditapp.model.post.Media;
-import lilee.hd.anotterredditapp.model.post.RedditVideo;
 
 @Entity(tableName = "post_table")
 public class Post {
@@ -35,16 +30,13 @@ public class Post {
     @SerializedName("selftext")
     @Expose
     private String body;
-    @SerializedName("url")
-    @Expose
-    private String postUrl;
     // bottom bar
     @SerializedName("ups")
     @Expose
     private int ups;
-    @SerializedName("thumbnail")
+    @SerializedName("url")
     @Expose
-    private String thumbnail;
+    private String imageUrl;
     @SerializedName("num_comments")
     @Expose
     private int numComments;
@@ -56,22 +48,6 @@ public class Post {
 
 //    ----------------------------------------Getter Setter----------------------------------------
 
-
-    public Post(Media media, String subredditR, String author, long date, String title,
-                String body, String postUrl, int ups, String thumbnail, int numComments, String videoUrl, boolean isVideo) {
-        this.media = media;
-        this.subredditR = subredditR;
-        this.author = author;
-        this.date = date;
-        this.title = title;
-        this.body = body;
-        this.postUrl = postUrl;
-        this.ups = ups;
-        this.thumbnail = thumbnail;
-        this.numComments = numComments;
-        this.videoUrl = videoUrl;
-        this.isVideo = isVideo;
-    }
 
     public int getNumComments() {
         return numComments;
@@ -129,14 +105,6 @@ public class Post {
         this.body = body;
     }
 
-    public String getPostUrl() {
-        return postUrl;
-    }
-
-    public void setPostUrl(String postUrl) {
-        this.postUrl = postUrl;
-    }
-
     public int getUps() {
         return ups;
     }
@@ -153,12 +121,12 @@ public class Post {
         this.media = media;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 

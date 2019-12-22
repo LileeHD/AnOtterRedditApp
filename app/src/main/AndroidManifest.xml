@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_leaf_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".detail.DetailActivity"></activity>
         <activity android:name=".home_ui.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

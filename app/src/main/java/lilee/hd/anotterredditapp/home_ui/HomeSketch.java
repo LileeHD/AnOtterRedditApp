@@ -73,15 +73,15 @@
 //                Log.d("searchCall", "onResponse: Server Response" + response.toString());
 //                Log.d("searchCall", "onResponse: received information" + response.body().toString());
 //
-//                ArrayList<Children> childrenArrayList = response.body().getData().getChildren();
+//                ArrayList<Children> childrenArrayList = response.body().getListData().getChildren();
 //                for (int i = 0; i < childrenArrayList.size(); i++) {
 //
 //                    Log.d("searchCall", "onResponse: \n" +
 //                            "kind: " + childrenArrayList.get(i).getKind() + "\n" +
-//                            "subreddit: " + childrenArrayList.get(i).getData().getSubreddit() + "\n" +
-//                            "title: " + childrenArrayList.get(i).getData().getTitle() + "\n" +
-//                            "ups: " + childrenArrayList.get(i).getData().getUps() + "\n" +
-//                            "isVideo: " + childrenArrayList.get(i).getData().isVideo() + "\n" +
+//                            "subreddit: " + childrenArrayList.get(i).getListData().getSubreddit() + "\n" +
+//                            "title: " + childrenArrayList.get(i).getListData().getTitle() + "\n" +
+//                            "ups: " + childrenArrayList.get(i).getListData().getUps() + "\n" +
+//                            "isVideo: " + childrenArrayList.get(i).getListData().isVideo() + "\n" +
 //                            "-------------------------------------------------------------------------\n\n");
 //                }
 //
@@ -92,10 +92,10 @@
 //                for (Children post : childrenArrayList) {
 //                    content = "";
 //                    content += "kind: " + post.getKind() + "\n";
-//                    content += "subreddit: " + post.getData().getSubreddit() + "\n";
-//                    content += "title: " + post.getData().getTitle() + "\n";
-//                    content += "ups: " + post.getData().getUps() + "\n";
-//                    content += "isVideo: " + post.getData().isVideo() + "\n\n";
+//                    content += "subreddit: " + post.getListData().getSubreddit() + "\n";
+//                    content += "title: " + post.getListData().getTitle() + "\n";
+//                    content += "ups: " + post.getListData().getUps() + "\n";
+//                    content += "isVideo: " + post.getListData().isVideo() + "\n\n";
 //                    textView.append(content);
 //                }
 //            }
@@ -115,23 +115,23 @@
 //                .addConverterFactory(GsonConverterFactory.create())
 //                .build();
 //        RedditAPI redditAPI = retrofit.create(RedditAPI.class);
-//        Call<Feed> call = redditAPI.getData();
+//        Call<Feed> call = redditAPI.getListData();
 //        call.enqueue(new Callback<Feed>() {
 //            @Override
 //            public void onResponse(Call<Feed> call, Response<Feed> response) {
 //                Log.d(TAG_TOKEN, "onResponse: Server Response" + response.toString());
 //                Log.d(TAG_TOKEN, "onResponse: received information" + response.body().toString());
 //
-//                ArrayList<Children> childrenArrayList = response.body().getData().getChildren();
+//                ArrayList<Children> childrenArrayList = response.body().getListData().getChildren();
 //                for (int i = 0; i < childrenArrayList.size(); i++) {
 //
 //                    Log.d(TAG_TOKEN, "onResponse: \n" +
 //                            "kind: " + childrenArrayList.get(i).getKind() + "\n" +
-//                            "title: " + childrenArrayList.get(i).getData().getTitle() + "\n" +
-//                            "subscribers: " + childrenArrayList.get(i).getData().getSubscribers() + "\n" +
-//                            "public_description: " + childrenArrayList.get(i).getData().getPublicDescription() + "\n" +
-//                            "header_title: " + childrenArrayList.get(i).getData().getHeaderTitle() + "\n" +
-//                            "url: " + childrenArrayList.get(i).getData().getUrl() + "\n" +
+//                            "title: " + childrenArrayList.get(i).getListData().getTitle() + "\n" +
+//                            "subscribers: " + childrenArrayList.get(i).getListData().getSubscribers() + "\n" +
+//                            "public_description: " + childrenArrayList.get(i).getListData().getPublicDescription() + "\n" +
+//                            "header_title: " + childrenArrayList.get(i).getListData().getHeaderTitle() + "\n" +
+//                            "url: " + childrenArrayList.get(i).getListData().getUrl() + "\n" +
 //                            "-------------------------------------------------------------------------\n\n");
 //                }
 //            }
@@ -163,13 +163,13 @@
 //        String url = builder.toString();
 //
 //        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(url));
+//        intent.setListData(Uri.parse(url));
 //        startActivity(intent);
 //        Log.d(TAG_TOKEN, "startLogin: URL: "+url);
 //    }
 //
 //    private void catchAccessToken() {
-//        final Uri uri = getIntent().getData();
+//        final Uri uri = getIntent().getListData();
 //        if (uri != null && uri.toString().startsWith(REDIRECT_URI)) {
 //
 //            final String code = uri.getQueryParameter("code");
