@@ -17,67 +17,14 @@ import lilee.hd.anotterredditapp.model.post.Post;
 
 public class ConverterUtil {
 
-        private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//
-//        @TypeConverter
-//        public static Date fromTimestamp(String value) {
-//            if (value != null) {
-//                try {
-//                    TimeZone timeZone = TimeZone.getTimeZone("IST");
-//                    df.setTimeZone(timeZone);
-//                    return df.parse(value);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            } else {
-//                return null;
-//            }
-//        }
-//
-//
-//        @TypeConverter
-//        public static String dateToTimestamp(Date value) {
-//            TimeZone timeZone = TimeZone.getTimeZone("IST");
-//            df.setTimeZone(timeZone);
-//            return value == null ? null : df.format(value);
-//        }
-//
-//    private static final int SECOND = 1000;
-//
-//    @Nullable
-//    static List<Post> toPosts(Feed feed) {
-//        List<Children> postData = feed != null ? feed.getData().getChildren() : null;
-//        if (postData == null || postData.size() == 0) {
-//            return null;
-//        }
-//
-//        List<Post> posts = new ArrayList<>();
-//        for (Children feedElem : postData) {
-//            posts.add(toPost(feedElem));
-//        }
-//        return posts;
-//    }
-//
-//    private static Post toPost(Children children) {
-//        Post post = children.getData();
-//        long date = post.getDate() * SECOND;
-//        post.setDate(date);
-////        post.setOrder(date);
-//        return post;
-//    }
-
-    public static void convertTime(String date){
-
+    @TypeConverter
+    public static Date toDate(Long timestamp) {
+        return timestamp == null ? null : new Date(timestamp);
     }
-    public static void main(String[] args) {
-        Long epochTime = System.currentTimeMillis(); // Gets milliseconds passed since epoch(1970)
 
-        Date date = new Date(); // Same thing, but represents date object for helpful utilities
-
-        System.out.println(epochTime);
-        System.out.println(date);
-        System.out.println(date.getTime()); // This prints the time in milliseconds
+    @TypeConverter
+    public static Long toTimestamp(Date date) {
+        return date == null ? null : date.getTime();
     }
     }
 

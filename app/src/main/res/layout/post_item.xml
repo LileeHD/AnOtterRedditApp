@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-
+    android:focusable="true"
     android:elevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +42,7 @@
                 android:id="@+id/date_updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:hint="@string/_7h"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -63,7 +64,6 @@
                 android:paddingVertical="4dp"
                 android:text="@string/post_title"
                 android:textSize="16sp"
-                android:focusable="true"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.625"
@@ -113,85 +113,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_text_box"/>
-
-<!--        <ImageView-->
-<!--            android:id="@+id/up_arrow"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:src="@drawable/ic_up_arrow"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/post_vote_num"-->
-<!--            app:layout_constraintVertical_bias="1.0" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/post_vote_num"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="4dp"-->
-<!--            android:hint="22"-->
-<!--            android:text=""-->
-<!--            android:textSize="14sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/up_arrow" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/down_arrow"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_marginStart="4dp"-->
-<!--            android:src="@drawable/ic_down_arrow"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/post_vote_num"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/post_vote_num" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/comment_img"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:src="@drawable/ic_comment"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/commentsNum"-->
-<!--            app:layout_constraintHorizontal_bias="0.963"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/down_arrow" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/commentsNum"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="127"-->
-<!--            android:textSize="12sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.517"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/post_text"-->
-<!--            app:layout_constraintVertical_bias="0.0" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/share_img"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:src="@drawable/ic_share"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/share"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/commentsNum"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/share" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/share"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="8dp"-->
-<!--            android:text="@string/share"-->
-<!--            android:textSize="12sp"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

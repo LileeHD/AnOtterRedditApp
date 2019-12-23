@@ -1,5 +1,7 @@
 package lilee.hd.anotterredditapp.home_ui;
 
+import android.accessibilityservice.AccessibilityService;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -41,6 +45,7 @@ import lilee.hd.anotterredditapp.detail.DetailActivity;
 import lilee.hd.anotterredditapp.model.post.Children;
 import lilee.hd.anotterredditapp.model.token.TokenResponse;
 import lilee.hd.anotterredditapp.reddit.RedditNetworking;
+import lilee.hd.anotterredditapp.util.ConverterUtil;
 import lilee.hd.anotterredditapp.viewmodel.PostViewModel;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
@@ -50,7 +55,7 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
     @BindView(R.id.logo)
     ImageView logo;
     @BindView(R.id.search_edit_text)
-    EditText searchEditText;
+    AppCompatEditText searchEditText;
     @BindView(R.id.search_btn)
     ImageButton searchBtn;
     @BindView(R.id.home_list_view)
@@ -79,16 +84,22 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         checkConnection();
-        searchBtn.setOnClickListener(this::onSearchClick);
+        searchBtn.setOnClickListener(v -> {
+            initViewModel();
+            initPostView();
+        });
         searchEditText.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                onSearchClick(v);
+//                onSearchClick(v);
+                initViewModel();
+                initPostView();
+                closeKeyboard();
                 return true;
             }
             return false;
         });
         Log.d(TAG, "onCreateView: PHARAH");
-        updateRefreshingUI();
+
         return view;
     }
 
@@ -103,16 +114,19 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
                 snackbar = Snackbar.make(view.findViewById(R.id.coordinator), snackMsg, Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 mSwipeRefreshLayout.setRefreshing(false);
+                updateRefreshingUI();
             });
         }
     }
 
     private void closeKeyboard() {
-        View view = (getActivity()).getCurrentFocus();
+        View view = (Objects.requireNonNull(getActivity())).getCurrentFocus();
         if (view != null) {
+
             InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (inputMethodManager != null) {
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                            view.clearFocus();
             }
         }
     }
@@ -126,9 +140,10 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
             adapter.notifyDataSetChanged();
             Log.d(TAG, "initViewModel: ");
         });
+    }
+    private void getCurrentFeed(){
 
     }
-
     private void initPostView() {
         if (adapter == null) {
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
@@ -150,6 +165,11 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
         RedditNetworking networking = new RedditNetworking();
         networking.searchCall(mSearchResult);
     }
+
+    private void saveInput(){
+
+    }
+
 // Click
     @Override
     public void onPostClick(PostViewModel model, int position) {
@@ -169,7 +189,6 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
         if (!feedName.equals("")) {
             mSearchResult = feedName;
             searchResult();
-            closeKeyboard();
         } else {
             Log.d(TAG, "onClick: SET A SNACK BAR ");
         }

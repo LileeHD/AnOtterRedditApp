@@ -1,19 +1,15 @@
 package lilee.hd.anotterredditapp.home_ui;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import lilee.hd.anotterredditapp.R;
-import lilee.hd.anotterredditapp.otter.OtterFragment;
+import lilee.hd.anotterredditapp.subreddits.SaveRedditFragment;
 import lilee.hd.anotterredditapp.profile.ProfileFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -50,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
                     selectedFragment = new ProfileFragment();
                     break;
                 case R.id.ic_otter:
-                    selectedFragment = new OtterFragment();
+                    selectedFragment = new SaveRedditFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction()

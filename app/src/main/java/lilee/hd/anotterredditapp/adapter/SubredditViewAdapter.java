@@ -8,12 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import lilee.hd.anotterredditapp.R;
+import lilee.hd.anotterredditapp.model.subreddit.Subreddit;
+import lilee.hd.anotterredditapp.viewmodel.SubredditViewModel;
 
 public class SubredditViewAdapter extends RecyclerView.Adapter<SubredditViewAdapter.SubredditViewHolder> {
-
+    private SubredditViewModel viewModel;
+    private List<Subreddit> subreddits;
     @NonNull
     @Override
     public SubredditViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

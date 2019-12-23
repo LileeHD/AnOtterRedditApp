@@ -80,6 +80,7 @@ public class RedditNetworking {
                 .build();
         redditAPI = retrofit.create(RedditAPI.class);
     }
+
     public void searchCall(String result) {
         Call<Feed> call = redditAPI.searchPost(result, time);
         call.enqueue(new Callback<Feed>() {
@@ -87,7 +88,6 @@ public class RedditNetworking {
             public void onResponse(Call<Feed> call, Response<Feed> response) {
                 Log.d("searchCall", "onResponse: Server Response" + response.toString());
                 Log.d("searchCall", "onResponse: received information" + response.body().toString());
-
                 List<Children> childrenArrayList = response.body().getData().getChildren();
                 for (int i = 0; i < childrenArrayList.size(); i++) {
 
@@ -103,7 +103,6 @@ public class RedditNetworking {
                             "reddit_video: " + childrenArrayList.get(i).getData().getVideoUrl() + "\n" +
                             "-------------------------------------------------------------------------\n\n");
                 }
-
             }
 
             @Override

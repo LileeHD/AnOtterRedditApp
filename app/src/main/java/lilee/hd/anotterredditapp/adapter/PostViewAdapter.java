@@ -26,8 +26,6 @@ import lilee.hd.anotterredditapp.viewmodel.PostViewModel;
 
 public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostViewHolder>{
 
-    private static final int VIEW_TYPE_POST = 0;
-    private static final int VIEW_TYPE_COMMENT = 1;
     private static final String TAG = "PostViewAdapter";
 
     private Context mContext;
@@ -57,11 +55,6 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
         holder.postTitle.setText(post.getData().getTitle());
         holder.rSubredditName.setText(post.getData().getSubredditR());
         holder.postAuthor.setText(post.getData().getAuthor());
-//        holder.dateUpdate.setText((CharSequence) ConverterUtil.fromTimestamp(String.valueOf(post.getData().getDate())));
-
-//        holder.postVotes.setText(post.getData().getUps());
-//        holder.postCommentsNum.setText(post.getData().getNumComments());
-
         if (post.getData().getImageUrl()==null){
             holder.postThumbnail.setVisibility(View.GONE);
         }else {
@@ -83,10 +76,6 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
                     .setDefaultRequestOptions(defaultOptions)
                     .load(post.getData().getImageUrl())
                     .into(holder.postThumbnail);
-    }
-
-    private void videoLoader(PostViewHolder holder){
-
     }
 
     @Override
@@ -119,11 +108,7 @@ public class PostViewAdapter extends RecyclerView.Adapter<PostViewAdapter.PostVi
         @BindView(R.id.post_text)
         TextView postBody;
         PostClickListener listener;
-        //        bottom bar
-//        @BindView(R.id.post_vote_num)
-//        TextView postVotes;
-//        @BindView(R.id.commentsNum)
-//        TextView postCommentsNum;
+
         PostViewHolder(@NonNull View itemView, PostClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);

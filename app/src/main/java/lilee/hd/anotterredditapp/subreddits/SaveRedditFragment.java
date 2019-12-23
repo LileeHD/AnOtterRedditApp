@@ -1,4 +1,4 @@
-package lilee.hd.anotterredditapp.otter;
+package lilee.hd.anotterredditapp.subreddits;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,13 +16,13 @@ import butterknife.ButterKnife;
 import lilee.hd.anotterredditapp.R;
 import lilee.hd.anotterredditapp.reddit.RedditNetworking;
 
-public class OtterFragment extends Fragment {
+public class SaveRedditFragment extends Fragment {
     @BindView(R.id.otter_swipe_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.otter_post_rview)
     RecyclerView recyclerView;
 
-    public OtterFragment() {
+    public SaveRedditFragment() {
     }
     @Nullable
     @Override

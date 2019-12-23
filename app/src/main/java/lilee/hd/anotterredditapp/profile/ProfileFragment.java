@@ -77,15 +77,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    private void profileViewModel() {
-        viewModel = ViewModelProviders.of(this).get(PostViewModel.class);
-        viewModel.init();
-        viewModel.getTokenAccess().observe(this, tokenResponse -> {
-            String accessToken = tokenResponse.getAccessToken();
-            Log.d(TAG, "initViewModel: ");
-        });
-
-    }
+//    private void profileViewModel() {
+//        viewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+//        viewModel.init();
+//        viewModel.getTokenAccess().observe(this, tokenResponse -> {
+//            String accessToken = tokenResponse.getAccessToken();
+//            Log.d(TAG, "initViewModel: ");
+//        });
+//
+//    }
 
 
     @Override

@@ -60,5 +60,6 @@
     <string name="connection">Connection</string>
     <string name="connected">Internet Connected</string>
     <string name="no_connected">Internet Not Connected</string>
+    <string name="save">Save</string>
 
 </resources>

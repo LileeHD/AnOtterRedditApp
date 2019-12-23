@@ -44,6 +44,14 @@ public interface RedditAPI {
     Call<Feed> searchPost(@Query("q") String postName,
                           @Query("t") String time);
 
+    @GET("search.json?&sort=new&raw_json=1&type=link")
+    Call<Feed> inputResult(@Query("q") String postName);
+
+    @GET("{subreddit}/about.json")
+    Call<Subreddit> getSubreddit(@Path("subreddit") String subreddit);
+
+    @GET("r/{subreddit_list_name}/new.json")
+    Call<Feed>getSavedFeed(@Path("subreddit_list_name") String subredditList);
 
     /**
      * access token and user data
@@ -82,7 +90,5 @@ public interface RedditAPI {
     @GET("subreddits/mine/subscriber?raw_json=1")
     Call<Subreddit> getSubscribedThing();
 
-    @GET("r/{account_feed}/new.json")
-    Call<Feed>getAccountFeed(@Path("account_feed") String accountFeed);
 
 }
