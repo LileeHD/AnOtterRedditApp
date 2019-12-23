@@ -85,14 +85,25 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
         ButterKnife.bind(this, view);
         checkConnection();
         searchBtn.setOnClickListener(v -> {
-            initViewModel();
             initPostView();
+            String feedName = searchEditText.getText().toString();
+            if (!feedName.equals("")){
+                mSearchResult = feedName;
+                mPostViewModel = ViewModelProviders.of(this).get(PostViewModel.class);
+                mPostViewModel.init();
+                mPostViewModel.getSearchResults(mSearchResult).observe(this, feed -> {
+                    List<Children> childrenList = feed.getData().getChildren();
+                    postsList.addAll(childrenList);
+                    adapter.notifyDataSetChanged();
+                    Log.d(TAG, "initViewModel: ");
+                });
+            }else {
+                Log.d(TAG, "onClick: SET A SNACK BAR ");
+            }
         });
         searchEditText.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-//                onSearchClick(v);
-                initViewModel();
-                initPostView();
+                onSearchClick(v);
                 closeKeyboard();
                 return true;
             }
@@ -109,7 +120,6 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
         if (savedInstanceState == null) {
             String snackMsg = "Is loading...";
             mSwipeRefreshLayout.setOnRefreshListener(() -> {
-                initViewModel();
                 Log.d(TAG, "onRefresh: refresh the list");
                 snackbar = Snackbar.make(view.findViewById(R.id.coordinator), snackMsg, Snackbar.LENGTH_SHORT);
                 snackbar.show();
@@ -140,10 +150,9 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
             adapter.notifyDataSetChanged();
             Log.d(TAG, "initViewModel: ");
         });
-    }
-    private void getCurrentFeed(){
 
     }
+
     private void initPostView() {
         if (adapter == null) {
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL);
@@ -164,10 +173,6 @@ public class HomeFragment extends Fragment implements PostViewAdapter.PostClickL
     private void searchResult() {
         RedditNetworking networking = new RedditNetworking();
         networking.searchCall(mSearchResult);
-    }
-
-    private void saveInput(){
-
     }
 
 // Click

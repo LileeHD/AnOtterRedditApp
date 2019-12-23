@@ -28,12 +28,17 @@ public class PostViewModel extends ViewModel {
         }
         repository = RedditRepository.getInstance();
 //        TODO here the logic between feeds
-//        mutableLiveData = repository.getFeed();
-        mutableLiveData= repository.searchResult(minputResult);
+        mutableLiveData = repository.getFeed();
+//        mutableLiveData= repository.searchResult(minputResult);
 //        mutableLiveData= repository.savedSubredditsFeed();
     }
 
     public MutableLiveData<Feed> getFeedRepository(){
+        return mutableLiveData;
+    }
+
+    public MutableLiveData<Feed> getSearchResults(String query) {
+        mutableLiveData = repository.searchResult(query);
         return mutableLiveData;
     }
 

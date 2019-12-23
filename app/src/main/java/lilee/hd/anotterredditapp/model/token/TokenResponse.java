@@ -3,36 +3,35 @@ package lilee.hd.anotterredditapp.model.token;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import lilee.hd.anotterredditapp.util.ConverterUtil;
 
 @Entity(tableName = "token_table")
 public class TokenResponse {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    @ColumnInfo(name = "access_token")
     @SerializedName("access_token")
     @Expose
     private String accessToken;
 
-    @ColumnInfo(name = "token_type")
     @SerializedName("token_type")
     @Expose
     private String tokenType;
 
-    @ColumnInfo(name = "expires_in")
+
     @SerializedName("expires_in")
     @Expose
     private long expiresIn;
 
-    @ColumnInfo(name = "uscoperl")
     @SerializedName("scope")
     @Expose
     private String scope;
 
-    @ColumnInfo(name = "refresh_token")
     @SerializedName("refresh_token")
     @Expose
     private String refreshToken;
