@@ -47,5 +47,18 @@
     <string name="random_number">15688446</string>
     <string name="subreddit_icon">subreddit_icon</string>
     <string name="favorite_icon">favorite_icon</string>
+    <string name="_7h">7h</string>
+    <string name="up_arrow">up arrow</string>
+    <string name="_22">22</string>
+    <string name="down_arrow">down arrow</string>
+    <string name="comment_icon">comment icon</string>
+    <string name="_127">127</string>
+    <string name="login_state">Login state</string>
+    <string name="lilee">Lilee</string>
+    <string name="sign_in_or_sign_up">Sign in or Sign up</string>
+    <string name="refresh">refresh</string>
+    <string name="connection">Connection</string>
+    <string name="connected">Internet Connected</string>
+    <string name="no_connected">Internet Not Connected</string>
 
 </resources>

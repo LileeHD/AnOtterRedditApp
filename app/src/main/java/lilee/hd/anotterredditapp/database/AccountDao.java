@@ -31,8 +31,8 @@ public interface AccountDao {
     @Query("SELECT * FROM account_table LIMIT 1")
     LiveData<Account> getCurrentAccountLiveData();
 
-    @Query("UPDATE account_table SET profile_image_url = :profileImageUrl, banner_image_url = :bannerImageUrl WHERE username = :username")
-    void updateAccountInfo(String username, String profileImageUrl, String bannerImageUrl, List<Subreddit> subreddits);
+//    @Query("UPDATE account_table SET profile_image_url = :profileImageUrl, banner_image_url = :bannerImageUrl WHERE username = :username")
+//    void updateAccountInfo(String username, String profileImageUrl, String bannerImageUrl, List<Subreddit> subreddits);
 
     @Query("UPDATE account_table SET is_current_user = 1 WHERE username = :username")
     void markAccountCurrent(String username);

@@ -23,8 +23,8 @@ public interface TokenDao {
     void delete(TokenResponse tokenResponse);
 
     @Query("SELECT * FROM token_table")
-    TokenResponse getcurrentToken();
+    LiveData<TokenResponse> getcurrentToken();
 
     @Query("SELECT * FROM token_table")
-    TokenResponse getrefreshToken();
+    LiveData<TokenResponse> getrefreshToken();
 }

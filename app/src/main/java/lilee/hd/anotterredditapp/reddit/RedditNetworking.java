@@ -1,7 +1,9 @@
 package lilee.hd.anotterredditapp.reddit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import lilee.hd.anotterredditapp.database.OtterDatabase;
 import lilee.hd.anotterredditapp.model.post.Children;
 import lilee.hd.anotterredditapp.model.post.Feed;
+import lilee.hd.anotterredditapp.model.subreddit.Subreddit;
 import lilee.hd.anotterredditapp.model.token.TokenResponse;
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
@@ -24,6 +27,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static lilee.hd.anotterredditapp.reddit.Constants.ACCESS_TOKEN_KEY;
+import static lilee.hd.anotterredditapp.reddit.Constants.AUTHORIZATION_BEARER;
 import static lilee.hd.anotterredditapp.reddit.Constants.AUTHORIZATION_CODE_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.AUTHORIZATION_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.BASE_URL;
@@ -31,8 +36,10 @@ import static lilee.hd.anotterredditapp.reddit.Constants.CLIENT_ID;
 import static lilee.hd.anotterredditapp.reddit.Constants.CLIENT_ID_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.DURATION;
 import static lilee.hd.anotterredditapp.reddit.Constants.DURATION_KEY;
+import static lilee.hd.anotterredditapp.reddit.Constants.EXPIRE_IN_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.OAUTH_BASE_URL;
 import static lilee.hd.anotterredditapp.reddit.Constants.OAUTH_URL_ACCESS;
+import static lilee.hd.anotterredditapp.reddit.Constants.PACKAGE;
 import static lilee.hd.anotterredditapp.reddit.Constants.REDIRECT_URI;
 import static lilee.hd.anotterredditapp.reddit.Constants.REDIRECT_URI_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.REFRESH_TOKEN_KEY;
@@ -43,6 +50,7 @@ import static lilee.hd.anotterredditapp.reddit.Constants.SCOPE_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.STATE;
 import static lilee.hd.anotterredditapp.reddit.Constants.STATE_KEY;
 import static lilee.hd.anotterredditapp.reddit.Constants.TAG_TOKEN;
+import static lilee.hd.anotterredditapp.reddit.Constants.TOKEN_TYPE;
 
 public class RedditNetworking {
 
@@ -199,17 +207,13 @@ public class RedditNetworking {
             Log.v(TAG_TOKEN, "onResume: URI received " + uri.toString());
 
             client = new OkHttpClient.Builder();
-            client.addInterceptor(new Interceptor() {
-                @NotNull
-                @Override
-                public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
+            client.addInterceptor(chain -> {
 
-                    Request request = chain.request();
-                    String credentials = Credentials.basic(CLIENT_ID, "");
-                    Request.Builder newRequest = request.newBuilder()
-                            .addHeader(AUTHORIZATION_KEY, credentials);
-                    return chain.proceed(newRequest.build());
-                }
+                Request request = chain.request();
+                String credentials = Credentials.basic(CLIENT_ID, "");
+                Request.Builder newRequest = request.newBuilder()
+                        .addHeader(AUTHORIZATION_KEY, credentials);
+                return chain.proceed(newRequest.build());
             });
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -221,23 +225,25 @@ public class RedditNetworking {
             call.enqueue(new Callback<TokenResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<TokenResponse> call, @NotNull Response<TokenResponse> response) {
-//                    Account account = database.accountDao().getCurrentAccount();
                     tokenResponse = response.body();
-
                     if (tokenResponse != null) {
-                        String accessToken = tokenResponse.getAccessToken();
-                        String tokenType = tokenResponse.getTokenType();
-                        String expiresIn = String.valueOf(tokenResponse.getExpiresIn());
-                        String scope = tokenResponse.getScope();
-                        String refreshToken = tokenResponse.getRefreshToken();
-                        Log.d(TAG, "onResponse: Token object" + accessToken + tokenType + expiresIn + expiresIn + scope + refreshToken);
+                        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
+                        editor.putString(ACCESS_TOKEN_KEY, tokenResponse.getAccessToken());
+                        editor.putString(TOKEN_TYPE, tokenResponse.getTokenType());
+                        editor.putString(EXPIRE_IN_KEY, String.valueOf(tokenResponse.getExpiresIn()));
+                        editor.putString(REFRESH_TOKEN_KEY, tokenResponse.getAccessToken());
+                        editor.putString(SCOPE_KEY, tokenResponse.getScope());
+                        editor.commit();
+
+                        Log.d(TAG, "onResponse: Token object" + tokenResponse);
                     }
 
                     Log.d(TAG, "code: " + code);
                     Log.d(TAG, "onResponse: Server Response: " + response.body().toString());
                     Log.d(TAG, "onResponse: Server Response: " + response.body().getAccessToken());
                     if (tokenResponse.getExpiresIn() ==0){
-                        refreshToken(tokenResponse);
+//                        refreshToken(tokenResponse);
                         Log.d(TAG, "onResponse: refresh token" + tokenResponse.getAccessToken());
                     }
                 }
@@ -250,24 +256,20 @@ public class RedditNetworking {
         }
     }
 
-    public void refreshToken(TokenResponse tokenResponse) {
+    public void refreshToken() {
         OkHttpClient.Builder client;
         if (tokenResponse != null) {
-            final String refreshToken = tokenResponse.getRefreshToken();
-            final String expireIn = String.valueOf(tokenResponse.getExpiresIn());
-            Log.d(TAG, "refreshToken: " + refreshToken + expireIn);
+            SharedPreferences preferences = this.context.getSharedPreferences(PACKAGE, Context.MODE_PRIVATE);
+            String refreshToken = preferences.getString(REFRESH_TOKEN_KEY, tokenResponse.getRefreshToken());
+            String expiresIn = preferences.getString(EXPIRE_IN_KEY, String.valueOf(tokenResponse.getExpiresIn()));
+            Log.d(TAG, "refreshToken: " + refreshToken + expiresIn);
             client = new OkHttpClient.Builder();
-            client.addInterceptor(new Interceptor() {
-                @NotNull
-                @Override
-                public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
-
-                    Request request = chain.request();
-                    String credentials = Credentials.basic(CLIENT_ID, "");
-                    Request.Builder newRequest = request.newBuilder()
-                            .addHeader(AUTHORIZATION_KEY, credentials);
-                    return chain.proceed(newRequest.build());
-                }
+            client.addInterceptor(chain -> {
+                Request request = chain.request();
+                String credentials = Credentials.basic(CLIENT_ID, "");
+                Request.Builder newRequest = request.newBuilder()
+                        .addHeader(AUTHORIZATION_KEY, credentials);
+                return chain.proceed(newRequest.build());
             });
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -275,7 +277,6 @@ public class RedditNetworking {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             RedditAPI redditAPI = retrofit.create(RedditAPI.class);
-
             if (refreshToken != null) {
                 Call<TokenResponse> call = redditAPI.getRefreshToken(REFRESH_TOKEN_KEY, refreshToken);
                 call.enqueue(new Callback<TokenResponse>() {
@@ -297,11 +298,10 @@ public class RedditNetworking {
         }
     }
 
-//    public void userFeed() {
-//        Account account = database.accountDao().getCurrentAccount();
+//    public void userFeed(TokenResponse tokenResponse) {
+////        Account account = database.accountDao().getCurrentAccount();
 //        OkHttpClient.Builder client;
-//        if (account!= null) {
-//
+//        if (tokenResponse != null) {
 //            client = new OkHttpClient.Builder();
 //            client.addInterceptor(new Interceptor() {
 //                @NotNull
@@ -349,7 +349,6 @@ public class RedditNetworking {
 //
 //        }
 //    }
-//    public void getAuthenticator(){
-//    }
+
     }
 

@@ -2,19 +2,19 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home_ui.HomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/home_frag"
-        android:layout_height="match_parent"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <!-- top toolbar -->
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout2"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -51,9 +51,10 @@
                         android:layout_marginBottom="8dp"
                         android:autofillHints="@string/autofill_hint"
                         android:hint="@string/search"
-                        android:inputType="textNoSuggestions"
+                        android:inputType="textAutoComplete"
                         android:maxWidth="150dp"
                         android:padding="8dp"
+                        android:textAlignment="viewStart"
                         android:textColorHint="@color/grey"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,19 +82,37 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- body -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/connection_info"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:hint="@string/connection"
+                android:background="@color/grey"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/swipe_layout"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout2"
-            android:background="@color/grey">
+            android:contextClickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:visibility="visible"
+            android:background="@color/grey"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_list_view"
                 android:layout_width="match_parent"
-                android:foregroundGravity="center"
-                android:elevation="8dp"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/post_item"/>
+                android:elevation="8dp"
+                android:scrollbars="vertical"
+                android:importantForAccessibility="yes"
+                android:foregroundGravity="center"
+                tools:listitem="@layout/post_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

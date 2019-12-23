@@ -26,5 +26,4 @@ public interface SubredditDao {
     @Query("SELECT * from subreddit_table WHERE display_name = :name COLLATE NOCASE LIMIT 1")
     LiveData<Subreddit> getSubredditLiveDataByName(String name);
 
-
 }

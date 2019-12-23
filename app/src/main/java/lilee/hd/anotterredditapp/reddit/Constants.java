@@ -56,6 +56,7 @@ public class Constants {
      */
     public static final String CLIENT_ID_KEY = "client_id";
     public static final String CLIENT_ID = "x7u8VJCpOneunQ";
+    public static final String PACKAGE = "lilee.hd.anotterredditapp";
     public static final String PASSWORD = "";
 
     public static final String RESPONSE_TYPE_KEY = "response_type";
@@ -70,6 +71,10 @@ public class Constants {
 
     public static final String REDIRECT_URI_KEY = "redirect_uri";
     public static final String REDIRECT_URI = "lilee.hd://callback";
+
+
+    public static final String CODE = "code";
+
 
     public static final String DURATION_KEY = "duration";
     public static final String DURATION = "permanent";

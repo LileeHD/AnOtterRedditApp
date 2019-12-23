@@ -70,6 +70,14 @@ public class ConverterUtil {
     public static void convertTime(String date){
 
     }
+    public static void main(String[] args) {
+        Long epochTime = System.currentTimeMillis(); // Gets milliseconds passed since epoch(1970)
 
+        Date date = new Date(); // Same thing, but represents date object for helpful utilities
+
+        System.out.println(epochTime);
+        System.out.println(date);
+        System.out.println(date.getTime()); // This prints the time in milliseconds
+    }
     }
 

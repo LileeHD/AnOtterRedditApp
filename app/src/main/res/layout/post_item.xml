@@ -4,7 +4,8 @@
     android:id="@+id/post_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="8dp"
+
     android:elevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +42,7 @@
                 android:id="@+id/date_updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="7h"
+                android:hint="@string/_7h"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -62,6 +63,7 @@
                 android:paddingVertical="4dp"
                 android:text="@string/post_title"
                 android:textSize="16sp"
+                android:focusable="true"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.625"
